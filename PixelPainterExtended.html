@@ -85,7 +85,9 @@
     <h1>Pixel Painter Extended</h1>
 </div>
 <div class="flexBox">
-    <div id="flexLeft"></div>
+    <div id="flexLeft">
+        <p>this is a bunch of text please dont yell at me im trying really hard.</p>
+    </div>
     <div id="flexMiddle">
             <div id="gridContainer"></div>   
     </div>
@@ -110,6 +112,7 @@
             <option value="yellow">Yellow</option>
         </select>
         <input id="hexPicker" type="text" name="hexbox">
+        <button type="button" onclick="applyColor()">Apply</button>
     </div>
 </div>
 
@@ -181,6 +184,16 @@
         if(e.target.value.length>=6){
             console.log("I made a Hex!");
             color = "#"+e.target.value;
+        }
+    }
+    let applyColor = () =>{
+        let box = document.querySelector("#hexPicker")
+        if(box.length>6 || box.length<6){
+            console.log("NOT A HEX REEEEEEEEEEEE!")
+        }
+        else{
+            console.log("I made a Hex!");
+            color = "#"+box.target.value;
         }
     }
     //Declan Behan and emily
