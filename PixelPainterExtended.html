@@ -88,16 +88,18 @@
     h2{
         width: auto;
         margin-top: 10px;
-        
-        padding: 0;
         font-family: 'Lekton', sans-serif;		
         font-size:18pt;
     }
     h3{
         margin: 0;
-        padding: 0;
         font-family: 'Lekton', sans-serif;        
         font-size: 16pt;
+    }
+    p{
+        margin: 0;
+        font-family: 'Lekton', sans-serif;        
+        font-size: 12pt;
     }
 	
 	</style>
@@ -109,6 +111,10 @@
 <div class="flexBox">
     <div id="flexLeft">
         <p>this is a bunch of text please dont yell at me im trying really hard.</p>
+        <h2>Options</h2>
+        <h3>Saves</h3>
+        <input id="saveName" type="text" name="savebox">
+        <button type="button" onclick="saveArt()">Save Art</button>
     </div>
     <div id="flexMiddle">
             <div id="gridContainer"></div>   
@@ -139,13 +145,15 @@
         <!--Color Selection based on HEX Colors-->
         <h3>Hex Color Picker</h3>
         <input id="hexPicker" type="text" name="hexbox">
-        <button type="button" onclick="applyColor()">Apply</button>
+        <button type="button" onclick="applyHex()">Apply Hex</button>
 
         <!--Color Selection based on RGB-->
-        <h3 id="rbgSelector">RGB Color Picker</h3>
         <h3 id="rgbSelector">RGB Color Picker</h3>
+        <p>Red:</p>
         <input id="rgbPickerRed" type="text" name="rgbBoxRed">
+        <p>Green:</p>
         <input id="rgbPickerGreen" type="text" name="rgbBoxGreen">
+        <p>Blue:</p>
         <input id="rgbPickerBlue" type="text" name="rgbBoxBlue">
         <button type="button" onclick="applyColors()">Apply RGB Values</button>
 
@@ -221,19 +229,19 @@
     }
 
     //changes the paint color based on a given hex code
-    let applyColor = () =>{
+    let applyHex = () =>{
 
         //reads in value from a hex picker box
-        let box = document.querySelector("#hexPicker")
+        let box = document.querySelector("#hexPicker");
 
         //validates bad entries
         if(box.length>6 || box.length<6){
-            console.log("NOT A HEX REEEEEEEEEEEE!")
+            console.log("NOT A HEX REEEEEEEEEEEE!");
         }
         //sets proper value if valid
         else{
             console.log("I made a Hex!");
-            color = "#"+box.target.value;
+            color = "#"+box.value;
         }
     }
 
@@ -275,6 +283,14 @@
     //CODE FROM: stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
     function rgbToHex(r,g,b){
         return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+    }
+    let saveArt = () =>{
+        let name = document.querySelector("#saveName").value;
+        if(name ==undefined || name == ""){
+            name = "UntitledArt"
+        }
+        console.log("Save Name: "+name)
+//        let canvas = 
     }
 
     //Declan Behan and Emily Turner
