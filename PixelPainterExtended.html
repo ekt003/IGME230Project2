@@ -261,6 +261,20 @@
         //generates new color
         document.querySelector("#rgbSelector").style.color = "rgb(" + boxRed.value + "," + boxGreen.value + "," + boxBlue.value + ")";
         color = "rgb(" + boxRed.value + "," + boxGreen.value + "," + boxBlue.value + ")";
+        document.querySelector("#hexPicker").value = rgbToHex(boxRed.value, boxGreen.value, boxBlue.value);
+    }
+
+    //converts to hex value and displays it in the hex box
+    //CODE FROM: stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+    function componentToHex(c){
+        var hex = c.toString(c);
+        return hex.Length == 1 ? "0" + hex:hex;
+    }
+
+    //converts to hex value and displays it in the hex box
+    //CODE FROM: stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+    function rgbToHex(r,g,b){
+        return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
     }
 
     //Declan Behan and Emily Turner
