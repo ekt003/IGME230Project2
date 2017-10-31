@@ -11,8 +11,8 @@
         background-color: lightgray;
     }
 	span.cell{
-		height:25px;
-		width:25px;
+		height:20px;
+		width:20px;
 		border:.0px solid #aaaaaa; /* actual width & height is 25px because of border */
 		background-color: #ffffff;
 		padding:0;
@@ -22,8 +22,8 @@
 	
 	/* Get rid of the cell border when it is selected */
 	span.cellSelected{
-		height:25px;
-		width:25px;
+		height:20px;
+		width:20px;
 		background-color: red;
 		padding:0;
 		margin:0;
@@ -140,9 +140,13 @@
         <h3>Hex Color Picker</h3>
         <input id="hexPicker" type="text" name="hexbox">
         <button type="button" onclick="applyColor()">Apply</button>
+<<<<<<< HEAD
 
         <!--Color Selection based on RGB-->
         <h3 id="rbgSelector">RGB Color Picker</h3>
+=======
+        <h3 id="rgbSelector">RGB Color Picker</h3>
+>>>>>>> ade0d31627ebd6ae9730c100ac8b08e866c2b0b1
         <input id="rgbPickerRed" type="text" name="rgbBoxRed">
         <input id="rgbPickerGreen" type="text" name="rgbBoxGreen">
         <input id="rgbPickerBlue" type="text" name="rgbBoxBlue">
@@ -158,6 +162,9 @@
     const numCols = 30;
     const numRows = 20;
     const cellWidth = 24;
+    const numCols = 16;
+    const numRows = 16;
+    const cellWidth = 19;
     const cellSpacing = 2;
     
     const container = document.querySelector("#gridContainer");
