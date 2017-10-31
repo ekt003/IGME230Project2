@@ -135,14 +135,17 @@
             <option value="WhiteSmoke">WhiteSmoke </option>
             <option value="yellow">Yellow</option>
         </select>
+        <!-- Hey y'all this is where the new stuff really starts-->
+        <!--Color Selection based on HEX Colors-->
         <h3>Hex Color Picker</h3>
         <input id="hexPicker" type="text" name="hexbox">
         <button type="button" onclick="applyColor()">Apply</button>
+
+        <!--Color Selection based on RGB-->
         <h3 id="rbgSelector">RGB Color Picker</h3>
         <input id="rgbPickerRed" type="text" name="rgbBoxRed">
         <input id="rgbPickerGreen" type="text" name="rgbBoxGreen">
         <input id="rgbPickerBlue" type="text" name="rgbBoxBlue">
-    
         <button type="button" onclick="applyColors()">Apply RGB Values</button>
 
     </div>
@@ -151,6 +154,7 @@
 
 
 <script>
+    //constant declaration
     const numCols = 30;
     const numRows = 20;
     const cellWidth = 24;
@@ -161,6 +165,7 @@
     const span = document.createElement("span");
     span.className = 'cell';
     
+    //sets up pixel grid
     const cells = [];
     for (let row = 0; row < numRows; row++){
         cells.push([]);
@@ -173,6 +178,7 @@
         }
     }
     
+    //color has a default value of red
     let color = "red";
     
     container.onclick = fillCell;
@@ -208,40 +214,55 @@
         mouseIsDown = false;
     }
     
+    
     document.querySelector("#colorChooser").onchange = (e)=>{
         color = e.target.value;
     }
-    document.querySelector("#hexPicker").onchange = (e)=>{
-        console.log("Hex was changed!");
-        if(e.target.value.length>=6){
-            console.log("I made a Hex!");
-            color = "#"+e.target.value;
-        }
-    }
+
+    //changes the paint color based on a given hex code
     let applyColor = () =>{
+
+        //reads in value from a hex picker box
         let box = document.querySelector("#hexPicker")
+
+        //validates bad entries
         if(box.length>6 || box.length<6){
             console.log("NOT A HEX REEEEEEEEEEEE!")
         }
+        //sets proper value if valid
         else{
             console.log("I made a Hex!");
             color = "#"+box.target.value;
         }
     }
 
+    //RGB Selector for Pixel Editor. Takes values from three boxes and converts it into an RGB value
     let applyColors = () =>{
-        
+
+        //reads in values from three different boxes
         let boxRed = document.querySelector("#rgbPickerRed");
         let boxGreen = document.querySelector("#rgbPickerGreen");
         let boxBlue = document.querySelector("#rgbPickerBlue");
 
+        //DRY Principle
+        let boxList = [boxRed, boxGreen, boxBlue];
 
+        //validates bad entries and sets them to zero
+        for(let element of boxList){
+            if(element.length>3){
+                element.value = 0;
+            }
+        }
+
+        //console log for debugging purposes
         console.log("Color Generated");
 
+        //generates new color
         document.querySelector("#rgbSelector").style.color = "rgb(" + boxRed.value + "," + boxGreen.value + "," + boxBlue.value + ")";
+        color = "rgb(" + boxRed.value + "," + boxGreen.value + "," + boxBlue.value + ")";
     }
 
-    //Declan Behan and emily
+    //Declan Behan and Emily Turner
 </script>
 </body>
 </html>
