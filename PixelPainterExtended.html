@@ -138,7 +138,12 @@
         <h3>Hex Color Picker</h3>
         <input id="hexPicker" type="text" name="hexbox">
         <button type="button" onclick="applyColor()">Apply</button>
-        <h3>RGB Color Picker</h3>
+        <h3 id="rbgSelector">RGB Color Picker</h3>
+        <input id="rgbPickerRed" type="text" name="rgbBoxRed">
+        <input id="rgbPickerGreen" type="text" name="rgbBoxGreen">
+        <input id="rgbPickerBlue" type="text" name="rgbBoxBlue">
+    
+        <button type="button" onclick="applyColors()">Apply RGB Values</button>
 
     </div>
 </div>
@@ -223,6 +228,19 @@
             color = "#"+box.target.value;
         }
     }
+
+    let applyColors = () =>{
+        
+        let boxRed = document.querySelector("#rgbPickerRed");
+        let boxGreen = document.querySelector("#rgbPickerGreen");
+        let boxBlue = document.querySelector("#rgbPickerBlue");
+
+
+        console.log("Color Generated");
+
+        document.querySelector("#rgbSelector").style.color = "rgb(" + boxRed.value + "," + boxGreen.value + "," + boxBlue.value + ")";
+    }
+
     //Declan Behan and emily
 </script>
 </body>
