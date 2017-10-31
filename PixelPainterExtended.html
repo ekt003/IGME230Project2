@@ -294,7 +294,9 @@
             name = "UntitledArt"
         }
         console.log("Save Name: "+name)
-//        let canvas = 
+        let canvas = cells;
+        canvas = JSON.stringify(canvas);
+        localStorage.setItem(name,canvas);
     }
 
     function hexToRgb(hex){
