@@ -115,6 +115,8 @@
         <h3>Saves</h3>
         <input id="saveName" type="text" name="savebox">
         <button type="button" onclick="saveArt()">Save Art</button>
+        <input id="loadName" type="text" name="loadbox">
+        <button type="button" onclick="loadArt()">Load Art</button>
     </div>
     <div id="flexMiddle">
             <div id="gridContainer"></div>   
@@ -293,6 +295,15 @@
         let canvas = cells;
         canvas = JSON.stringify(canvas);
         localStorage.setItem(name,canvas);
+    }
+    let loadArt = () =>{
+        let name = document.querySelector("#loadName").value;
+        if(name ==undefined || name == ""){
+            name = "UntitledArt"
+        }
+        console.log("Load Name: "+name)
+        let canvas = localStorage.getItem(name); 	// returns a String
+        canvas = JSON.parse(canvas);  
     }
 
     //Declan Behan and Emily Turner
