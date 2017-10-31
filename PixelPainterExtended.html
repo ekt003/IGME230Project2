@@ -243,6 +243,10 @@
         //sets proper value if valid
         else{
             console.log("I made a Hex!");
+            //sets rgb to proper values
+            document.querySelector("#rgbPickerRed") = hexToRgb(bax.value).r;
+            document.querySelector("#rgbPickerGreen") = hexToRgb(bax.value).g;
+            document.querySelector("#rgbPickerBlue") = hexToRgb(bax.value).b;
             color = "#"+box.value;
         }
     }
@@ -277,7 +281,7 @@
     //converts to hex value and displays it in the hex box
     //CODE FROM: stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
     function componentToHex(c){
-        var hex = c.toString(c);
+        var hex = c.toString(16);
         return hex.Length == 1 ? "0" + hex:hex;
     }
 
@@ -304,6 +308,15 @@
         console.log("Load Name: "+name)
         let canvas = localStorage.getItem(name); 	// returns a String
         canvas = JSON.parse(canvas);  
+    }
+
+    function hexToRgb(hex){
+        var result = /^#?([a-f/d]{2})([a-f/d]{2})$/i.exec(hex);
+        return result?{
+            r:parseInt(result[1],16),
+            g:parseInt(result[2],16),
+            b:parseInt(result[3],16),
+        }:null;
     }
 
     //Declan Behan and Emily Turner
