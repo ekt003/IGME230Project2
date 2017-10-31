@@ -4,6 +4,7 @@
 	<meta charset="utf-8" />
 	<title>Pixel Painter Extended</title>
 	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lekton:700" rel="stylesheet">
 	<style>
     
     html{
@@ -33,16 +34,23 @@
         display: flex; /* or inline-flex */
         flex-direction: row;
         flex-wrap: nowrap;
+        height: 850px;
 /*        justify-content: center;*/
 /*        align-items: stretch;*/
     }
     #flexLeft{
+        width: 400px;
         border: 1px solid black;
         order: 1;
     }
     #flexRight{
+        display: block;
+        width: 400px;
         border: 1px solid black;
         order: 3;
+        text-align: left;
+        padding-left: 100px: 
+        
     }
     #flexMiddle{
         border: 1px solid black;
@@ -55,7 +63,7 @@
 		padding:0;
 		display:inline-block;
 		position:absolute;
-/*        transform: translate(500px,0%)*/
+        transform: translate(450px,0%)
 	}
 	
 	#colorChooser{
@@ -75,8 +83,22 @@
     }
 	h1{
 		font-family: 'Press Start 2P', cursive;
-		font-size:1.3em;
+		font-size:2em;
 	}
+    h2{
+        width: auto;
+        margin-top: 10px;
+        
+        padding: 0;
+        font-family: 'Lekton', sans-serif;		
+        font-size:18pt;
+    }
+    h3{
+        margin: 0;
+        padding: 0;
+        font-family: 'Lekton', sans-serif;        
+        font-size: 16pt;
+    }
 	
 	</style>
 </head>
@@ -92,6 +114,8 @@
             <div id="gridContainer"></div>   
     </div>
     <div id="flexRight">
+        <h2>Toolbox</h2>
+        <h3>Preset Color Picker</h3>
         <select id="colorChooser">
             <option value="aqua">Aqua</option>
             <option value="Bisque">Bisque</option>
@@ -111,6 +135,7 @@
             <option value="WhiteSmoke">WhiteSmoke </option>
             <option value="yellow">Yellow</option>
         </select>
+        <h3>Hex Color Picker</h3>
         <input id="hexPicker" type="text" name="hexbox">
         <button type="button" onclick="applyColor()">Apply</button>
     </div>
