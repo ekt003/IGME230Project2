@@ -204,7 +204,7 @@
         let selectedCell = cells[row][col];
         selectedCell.className = "cellSelected";
         selectedCell.style.backgroundColor = color;
-        console.log(`${col},${row}`);
+//        console.log(`${col},${row}`);
 
     }
     
@@ -308,6 +308,12 @@
         console.log("Load Name: "+name)
         let canvas = localStorage.getItem(name); 	// returns a String
         canvas = JSON.parse(canvas);  
+        console.log(canvas);
+        for (let row = 0; row < numRows; row++){
+            for (let col = 0; col < numCols; col++){
+                cells[row][col]=canvas[row][col];
+            }
+        }
     }
 
     function hexToRgb(hex){
