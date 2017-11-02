@@ -253,7 +253,7 @@
         else{
             console.log("I made a Hex!");
             //sets rgb to proper values
-            let rgbConversion = hexToRgb(parseInt(box.value));
+            let rgbConversion = hexToRgb(box.value);
             document.querySelector("#rgbPickerRed").value = rgbConversion[1];
             document.querySelector("#rgbPickerGreen").value = rgbConversion[2];
             document.querySelector("#rgbPickerBlue").value = rgbConversion[3];
