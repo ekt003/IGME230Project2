@@ -57,6 +57,16 @@
         order: 2;
         flex-grow: 3;
     }
+    .palletteButton {
+        background-color: white;
+        border: 1px solid black;
+        color: white;
+        padding: 12px 12px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
 	#gridContainer{
 		top:10%;
 		left:0%;
@@ -104,7 +114,7 @@
 	
 	</style>
 </head>
-<body>
+<body onload="findMySaves()">
 <div id="titleBar">
     <h1>Pixel Painter Extended</h1>
 </div>
@@ -112,10 +122,14 @@
     <div id="flexLeft">
         <p>this is a bunch of text please dont yell at me im trying really hard.</p>
         <h2>Options</h2>
-        <h3>Saves</h3>
+        <h3>Save Art</h3>
         <input id="saveName" type="text" name="savebox">
         <button type="button" onclick="saveArt()">Save Art</button>
-        <input id="loadName" type="text" name="loadbox">
+        <h3>Load Art</h3>
+<!--        <input id="loadName" type="text" name="loadbox">-->
+        <select id="saveChooser" style="width: 170px">
+            <option value="">--Select Save--</option>
+        </select>
         <button type="button" onclick="loadArt()">Load Art</button>
     </div>
     <div id="flexMiddle">
@@ -124,6 +138,8 @@
     <div id="flexRight">
         <h2>Toolbox</h2>
         <h3>Preset Color Picker</h3>
+        
+<!--
         <select id="colorChooser">
             <option value="aqua">Aqua</option>
             <option value="Bisque">Bisque</option>
@@ -143,6 +159,30 @@
             <option value="WhiteSmoke">WhiteSmoke </option>
             <option value="yellow">Yellow</option>
         </select>
+-->
+        <button class="palletteButton" style="background-color: black" onclick="applyPallette('black')"></button>
+        <button class="palletteButton" style="background-color: gray" onclick="applyPallette('grey')"></button>
+        <button class="palletteButton" style="background-color: brown" onclick="applyPallette('brown')"></button>
+        <button class="palletteButton" style="background-color: red" onclick="applyPallette('red')"></button>
+        <button class="palletteButton" style="background-color: orange" onclick="applyPallette('orange')"></button>
+        <button class="palletteButton" style="background-color: yellow" onclick="applyPallette('yellow')"></button>
+        <button class="palletteButton" style="background-color: green" onclick="applyPallette('green')"></button>
+        <button class="palletteButton" style="background-color: dodgerblue" onclick="applyPallette('dodgerblue')"></button>
+        <button class="palletteButton" style="background-color: blue" onclick="applyPallette('blue')"></button>
+        <button class="palletteButton" style="background-color: purple" onclick="applyPallette('purple')"></button>
+        <br/>
+        <button class="palletteButton" style="background-color: white" onclick="applyPallette('white')"></button>
+        <button class="palletteButton" style="background-color: lightgray" onclick="applyPallette('lightgray')"></button>
+        <button class="palletteButton" style="background-color: sandybrown" onclick="applyPallette('sandybrown')"></button>
+        <button class="palletteButton" style="background-color: pink" onclick="applyPallette('pink')"></button>
+        <button class="palletteButton" style="background-color: gold" onclick="applyPallette('gold')"></button>
+        <button class="palletteButton" style="background-color: bisque" onclick="applyPallette('bisque')"></button>
+        <button class="palletteButton" style="background-color: lime" onclick="applyPallette('lime')"></button>
+        <button class="palletteButton" style="background-color: lightblue" onclick="applyPallette('lightblue')"></button>
+        <button class="palletteButton" style="background-color: cadetblue" onclick="applyPallette('cadetblue')"></button>
+        <button class="palletteButton" style="background-color: lavender" onclick="applyPallette('lavender')"></button>
+
+
         <!-- Hey y'all this is where the new stuff really starts-->
         <!--Color Selection based on HEX Colors-->
         <h3>Hex Color Picker</h3>
@@ -176,6 +216,8 @@
     const span = document.createElement("span");
     span.className = 'cell';
     
+    let allSaveNames = [];
+    
     //sets up pixel grid
     const cells = [];
     for (let row = 0; row < numRows; row++){
@@ -184,6 +226,7 @@
             let cell = span.cloneNode();
             cell.style.left = `${col * (cellWidth+cellSpacing)}px`;
             cell.style.top = `${row * (cellWidth+cellSpacing)}px`;
+            cell.style.backgroundColor = "white";
             container.appendChild(cell);
             cells[row][col] = cell;
         }
@@ -225,10 +268,10 @@
         mouseIsDown = false;
     }
     
-    
-    document.querySelector("#colorChooser").onchange = (e)=>{
-        color = e.target.value;
-    }
+//    
+//    document.querySelector("#colorChooser").onchange = (e)=>{
+//        color = e.target.value;
+//    }
 
     function hexToRgb(hex){
         let result = /^#?([a-f/d]{2})([a-f/d]{2})$/i.exec(hex);
@@ -305,30 +348,76 @@
 
 
     let saveArt = () =>{
-        let name = document.querySelector("#saveName").value;
-        if(name ==undefined || name == ""){
-            name = "UntitledArt"
+        let key = document.querySelector("#saveName").value;
+        if(key ==undefined || key == ""){
+            key = "UntitledArt"
         }
-        console.log("Save Name: "+name)
-        let canvas = cells;
+        console.log("Save Name: "+key)
+        
+        let canvas= [];
+        
+        for (let row = 0; row < numRows; row++){
+            canvas.push([]);
+            for (let col = 0; col < numCols; col++){
+                canvas[row][col] = cells[row][col].style.backgroundColor;
+                console.log(canvas[row][col]);
+            }
+        }
         canvas = JSON.stringify(canvas);
-        localStorage.setItem(name,canvas);
+        
+        let saveName = key;
+        allSaveNames.push(saveName);
+        console.log(allSaveNames);
+        let save = localStorage.setItem(key,canvas);
+        let permSave = localStorage.setItem("--SaveData--",allSaveNames)
+        AddSaveState(saveName);
+    }
+    let applyPallette = (colorval) =>{
+            color = colorval;
     }
     let loadArt = () =>{
-        let name = document.querySelector("#loadName").value;
-        if(name ==undefined || name == ""){
-            name = "UntitledArt"
+        let key = document.querySelector("#saveChooser").value;
+        if(key ==undefined || key == ""){
+            key = "UntitledArt"
         }
-        console.log("Load Name: "+name)
-        let canvas = localStorage.getItem(name); 	// returns a String
-        canvas = JSON.parse(canvas);  
-        console.log(canvas);
+        console.log("Load Name: "+key)
+        
+        //make 2d array
+        let newCanvas= [];
+        for (let col = 0; col < numCols; col++){
+            newCanvas.push([]);
+        }
+        
+        //load into canvas
+        newCanvas = localStorage.getItem(key); 	// returns a String
+        //parse it
+        newCanvas = JSON.parse(newCanvas);  
+        
+//        console.log(newCanvas);
         for (let row = 0; row < numRows; row++){
             for (let col = 0; col < numCols; col++){
-                cells[row][col]=canvas[row][col];
+                cells[row][col].style.backgroundColor = newCanvas[row][col];
             }
         }
     }
+    let AddSaveState = (nm) =>{
+        let loaddrop = document.querySelector("#saveChooser");
+        let option = document.createElement("option");
+        option.text = nm;
+        option.value = nm;
+        loaddrop.add(option);
+    }
+    let findMySaves = ()=>{
+        allSaveNames = localStorage.getItem("--SaveData--"); 
+        allSaveNames = JSON.parse(allSaveNames);  
+
+        for (let i = 0; i < allSaveNames.length; i++){
+            AddSaveState(allSaveNames[i]);
+        }
+        console.log(allSaveNames);
+    }
+    
+    
 
 
 
