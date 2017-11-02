@@ -230,6 +230,15 @@
         color = e.target.value;
     }
 
+    function hexToRgb(hex){
+        let result = /^#?([a-f/d]{2})([a-f/d]{2})$/i.exec(hex);
+        return result?{
+            r:parseInt(result[1],16),
+            g:parseInt(result[2],16),
+            b:parseInt(result[3],16),
+        }:null;
+    }
+
     //changes the paint color based on a given hex code
     let applyHex = () =>{
 
@@ -244,11 +253,25 @@
         else{
             console.log("I made a Hex!");
             //sets rgb to proper values
-            document.querySelector("#rgbPickerRed") = hexToRgb(bax.value).r;
-            document.querySelector("#rgbPickerGreen") = hexToRgb(bax.value).g;
-            document.querySelector("#rgbPickerBlue") = hexToRgb(bax.value).b;
+            let rgbConversion = hexToRgb(parseInt(box.value));
+            document.querySelector("#rgbPickerRed").value = rgbConversion[1];
+            document.querySelector("#rgbPickerGreen").value = rgbConversion[2];
+            document.querySelector("#rgbPickerBlue").value = rgbConversion[3];
             color = "#"+box.value;
         }
+    }
+
+    //converts to hex value and displays it in the hex box
+    //CODE FROM: stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+    function componentToHex(c){
+        let hex = c.toString(16);
+        return hex.length == 1 ? "0" + hex : hex;
+    }
+
+    //converts to hex value and displays it in the hex box
+    //CODE FROM: stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+    function rgbToHex(r,g,b){
+        return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
     }
 
     //RGB Selector for Pixel Editor. Takes values from three boxes and converts it into an RGB value
@@ -275,21 +298,12 @@
         //generates new color
         document.querySelector("#rgbSelector").style.color = "rgb(" + boxRed.value + "," + boxGreen.value + "," + boxBlue.value + ")";
         color = "rgb(" + boxRed.value + "," + boxGreen.value + "," + boxBlue.value + ")";
-        document.querySelector("#hexPicker").value = rgbToHex(boxRed.value, boxGreen.value, boxBlue.value);
+        
+        //hex color box code set
+        document.querySelector("#hexPicker").value = rgbToHex(parseInt(boxRed.value), parseInt(boxGreen.value), parseInt(boxBlue.value));
     }
 
-    //converts to hex value and displays it in the hex box
-    //CODE FROM: stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
-    function componentToHex(c){
-        var hex = c.toString(16);
-        return hex.Length == 1 ? "0" + hex:hex;
-    }
 
-    //converts to hex value and displays it in the hex box
-    //CODE FROM: stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
-    function rgbToHex(r,g,b){
-        return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-    }
     let saveArt = () =>{
         let name = document.querySelector("#saveName").value;
         if(name ==undefined || name == ""){
@@ -316,14 +330,7 @@
         }
     }
 
-    function hexToRgb(hex){
-        var result = /^#?([a-f/d]{2})([a-f/d]{2})$/i.exec(hex);
-        return result?{
-            r:parseInt(result[1],16),
-            g:parseInt(result[2],16),
-            b:parseInt(result[3],16),
-        }:null;
-    }
+
 
     //Declan Behan and Emily Turner
 </script>
