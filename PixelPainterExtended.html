@@ -114,7 +114,8 @@
 	
 	</style>
 </head>
-<body onload="findMySaves()">
+<body onload="findMySaves()
+">
 <div id="titleBar">
     <h1>Pixel Painter Extended</h1>
 </div>
@@ -205,6 +206,9 @@
 
 
 <script>
+    let allSaveNames = [];
+
+    
     //constant declaration
     const numCols = 16;
     const numRows = 16;
@@ -215,8 +219,6 @@
 
     const span = document.createElement("span");
     span.className = 'cell';
-    
-    let allSaveNames = [];
     
     //sets up pixel grid
     const cells = [];
@@ -272,7 +274,6 @@
 //    document.querySelector("#colorChooser").onchange = (e)=>{
 //        color = e.target.value;
 //    }
-
     function hexToRgb(hex){
         let result = /^#?([a-f/d]{2})([a-f/d]{2})$/i.exec(hex);
         return result?{
@@ -365,23 +366,29 @@
         }
         canvas = JSON.stringify(canvas);
         
-        allSaveNames.add(key);
+        allSaveNames.push(key);
         console.log(allSaveNames);
         let save = localStorage.setItem(key,canvas);
-        let permSave = localStorage.setItem("--SaveData--",allSaveNames)
-        AddSaveState(saveName);
+        allSaveNames = JSON.stringify(allSaveNames);
+        let permSave = localStorage.setItem("--SaveData--",allSaveNames);
+        AddSaveState(key);
     }
     let applyPallette = (colorval) =>{
             color = colorval;
     }
+    
+    //THis Function Loads a saved peice of art from the local storage. It reads from the dropdown menu
     let loadArt = () =>{
+        //gets the dropdown save menu
         let key = document.querySelector("#saveChooser").value;
+        
+        //Manage if they didnt make a save name
         if(key ==undefined || key == ""){
             key = "UntitledArt"
         }
         console.log("Load Name: "+key)
         
-        //make 2d array
+        //make a new 2d array
         let newCanvas= [];
         for (let col = 0; col < numCols; col++){
             newCanvas.push([]);
@@ -392,13 +399,14 @@
         //parse it
         newCanvas = JSON.parse(newCanvas);  
         
-//        console.log(newCanvas);
+        //Set the canvas to be what the save data has
         for (let row = 0; row < numRows; row++){
             for (let col = 0; col < numCols; col++){
                 cells[row][col].style.backgroundColor = newCanvas[row][col];
             }
         }
     }
+    //Function to add a save option to the save dropdown
     let AddSaveState = (nm) =>{
         let loaddrop = document.querySelector("#saveChooser");
         let option = document.createElement("option");
@@ -406,19 +414,26 @@
         option.value = nm;
         loaddrop.add(option);
     }
+    //Function that runs on load to find
     let findMySaves = ()=>{
-        allSaveNames = localStorage.getItem("--SaveData--"); 
-        allSaveNames = JSON.parse(allSaveNames);  
-
+        //finds the save names from local saves
+        let loadSaveNames = localStorage.getItem("--SaveData--");
+        //if its null, create it
+        if(!loadSaveNames){
+            allSaveNames = [];
+        }
+        //load them if it exsists
+        else{
+        allSaveNames = JSON.parse(loadSaveNames);  
+        }
+        //for each save add it to the load drop list
         for (let i = 0; i < allSaveNames.length; i++){
             AddSaveState(allSaveNames[i]);
         }
+        //also give them to the console
         console.log(allSaveNames);
     }
     
-    
-
-
 
     //Declan Behan and Emily Turner
 </script>
