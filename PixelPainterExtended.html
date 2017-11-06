@@ -252,6 +252,34 @@
 //        console.log(`${col},${row}`);
 
     }
+
+    function fillCellLarge(e){
+        //regular fill cell code
+        let rect = container.getBoundingClientRect();
+        let mouseX = e.clientX - rect.left;
+        let mouseY = e.clientY - rect.top;
+        let columnWidth = cellWidth+cellSpacing;
+        let col = Math.floor(mouseX/columnWidth);
+        let row = Math.floor(mouseY/columnWidth);
+
+        //sets all surrounding cells to the color
+        //middle cell
+        let selectedCell = cells[row][col];
+        selectedCell.className = "cellSelected";
+        selectedCell.style.backgroundColor = color;
+
+        let selectedCellArr = [cells[row+1][col], cells[row-1][col], cells[row][col+1], cells[row][col-1], cells[row+1][col+1], cells[row+1][col-1], cells[row-1][col+1], cells[row-1][col-1]];
+
+        for(cellAdj of selectedCellArr){
+            if(cellAdj != null){
+                cellAdj.className = "cellSelected";
+                cellAdj.style.backgroundColor = color;
+            }
+        }
+        
+
+
+    }
     
     let mouseIsDown = false;
     
@@ -276,11 +304,7 @@
 //    }
     function hexToRgb(hex){
         let result = /^#?([a-f/d]{2})([a-f/d]{2})$/i.exec(hex);
-        return result?{
-            r:parseInt(result[1],16),
-            g:parseInt(result[2],16),
-            b:parseInt(result[3],16),
-        }:null;
+        return result;
     }
 
     //changes the paint color based on a given hex code
