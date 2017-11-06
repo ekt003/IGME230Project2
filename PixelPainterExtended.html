@@ -365,8 +365,7 @@
         }
         canvas = JSON.stringify(canvas);
         
-        let saveName = key;
-        allSaveNames.push(saveName);
+        allSaveNames.add(key);
         console.log(allSaveNames);
         let save = localStorage.setItem(key,canvas);
         let permSave = localStorage.setItem("--SaveData--",allSaveNames)
