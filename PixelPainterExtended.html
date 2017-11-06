@@ -413,6 +413,7 @@
         let save = localStorage.setItem(key,canvas);
         allSaveNames = JSON.stringify(allSaveNames);
         let permSave = localStorage.setItem("--SaveData--",allSaveNames);
+        allSaveNames = JSON.parse(allSaveNames);
         AddSaveState(key);
     }
     let applyPallette = (colorval) =>{
