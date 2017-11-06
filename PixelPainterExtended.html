@@ -100,6 +100,7 @@
         margin-top: 10px;
         font-family: 'Lekton', sans-serif;		
         font-size:18pt;
+        margin-bottom:0px;
     }
     h3{
         margin: 0;
@@ -121,7 +122,10 @@
 </div>
 <div class="flexBox">
     <div id="flexLeft">
-        <p>this is a bunch of text please dont yell at me im trying really hard.</p>
+        <p>This is a pixel painter web application. Made by Declan Behan and Emily Turner for Professor Tony Jefferson's IGME 230 Web Design and Implementation, Section 5. Free to use share or modify with proper citation of the source material.</p>   
+        <h2>Tutorial</h2>
+        <p>Click and drag your mouse around the screen to fill it with color. Enter in a hex code, RGB value, or select a preset to change your color.</p>
+        <p>Change brush sizes by clicking the icons in the lower right portion of the screen. Click the eraser icon if you make any mistakes!</p>
         <h2>Options</h2>
         <h3>Save Art</h3>
         <input id="saveName" type="text" name="savebox">
@@ -281,7 +285,7 @@
 
 
     }
-
+/*
     function eraseCell(e){
         let rect = container.getBoundingClientRect();
         let mouseX = e.clientX - rect.left;
@@ -293,6 +297,7 @@
         selectedCell.className = "cellSelected";
         selectedCell.style.backgroundColor = "#fff";    
     }
+    */
     
     let mouseIsDown = false;
     
