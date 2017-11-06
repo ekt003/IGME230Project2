@@ -253,6 +253,7 @@
 
     }
 
+    //accounts for a larger brush size
     function fillCellLarge(e){
         //regular fill cell code
         let rect = container.getBoundingClientRect();
@@ -279,6 +280,18 @@
         
 
 
+    }
+
+    function eraseCell(e){
+        let rect = container.getBoundingClientRect();
+        let mouseX = e.clientX - rect.left;
+        let mouseY = e.clientY - rect.top;
+        let columnWidth = cellWidth+cellSpacing;
+        let col = Math.floor(mouseX/columnWidth);
+        let row = Math.floor(mouseY/columnWidth);
+        let selectedCell = cells[row][col];
+        selectedCell.className = "cellSelected";
+        selectedCell.style.backgroundColor = "#fff";    
     }
     
     let mouseIsDown = false;
