@@ -235,7 +235,7 @@
     //color has a default value of red
     let color = "red";
     
-    container.onclick = fillCell;
+    container.onclick = fillCellLarge;
     
     function fillCell(e){
         let rect = container.getBoundingClientRect();
@@ -283,7 +283,7 @@
     
     container.onmousemove = (e) =>{
         e.preventDefault();
-        if (mouseIsDown) fillCell(e);
+        if (mouseIsDown) fillCellLarge(e);
     }
     
     container.onmousedown = (e) =>{
