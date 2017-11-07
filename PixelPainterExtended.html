@@ -204,6 +204,15 @@
         <input id="rgbPickerBlue" type="text" name="rgbBoxBlue">
         <button type="button" onclick="applyColors()">Apply RGB Values</button>
 
+        <h3>Brush Options</h3>
+        <!--Applies different kinds of brushes depending on which icon is pressed-->
+        <button class="palletteButton" style="background-image: url('smallBrush.png')" onclick="changeSmall()"></button>
+        <button class="palletteButton" style="background-image: url('medBrush.png')" onclick="changeMed"></button>
+        <button class="palletteButton" style="background-image: url('largeBrush.png')" onclick="changeLarge()"></button>
+        
+        <!--This just sets the brush color to white -->
+        <button class="palletteButton" style="background-image: url('eraser.png')" onclick="applyPallette('white')"></button>
+
     </div>
 </div>
 
@@ -223,6 +232,9 @@
 
     const span = document.createElement("span");
     span.className = 'cell';
+
+    //brush size setup
+    let brushSize = 0;
     
     //sets up pixel grid
     const cells = [];
@@ -241,24 +253,46 @@
     //color has a default value of red
     let color = "red";
     
-    container.onclick = fillCellLarge;
+    container.onclick = fillCell;
     
+    //changes the brush size variable
+    function changeSmall(){
+        brushSize = 0;
+    }
+
+    function changeMed(){
+        brushSize = 1;
+    }
+
+    function changeLarge(){
+        brushSize = 2;
+    }
+
     function fillCell(e){
-        let rect = container.getBoundingClientRect();
-        let mouseX = e.clientX - rect.left;
-        let mouseY = e.clientY - rect.top;
-        let columnWidth = cellWidth+cellSpacing;
-        let col = Math.floor(mouseX/columnWidth);
-        let row = Math.floor(mouseY/columnWidth);
-        let selectedCell = cells[row][col];
-        selectedCell.className = "cellSelected";
-        selectedCell.style.backgroundColor = color;
+        if(brushSize=1){
+            fillCellMed(e);
+        }
+        else if(brushSize = 2){
+            fillCellLarge(e);
+        }
+        else{ //small brush size is default
+            let rect = container.getBoundingClientRect();
+            let mouseX = e.clientX - rect.left;
+            let mouseY = e.clientY - rect.top;
+            let columnWidth = cellWidth+cellSpacing;
+            let col = Math.floor(mouseX/columnWidth);
+            let row = Math.floor(mouseY/columnWidth);
+            let selectedCell = cells[row][col];
+            selectedCell.className = "cellSelected";
+            selectedCell.style.backgroundColor = color;
+        }
+
 //        console.log(`${col},${row}`);
 
     }
 
-    //accounts for a larger brush size
-    function fillCellLarge(e){
+    //accounts for a medium brush size
+    function fillCellMed(e){
         //regular fill cell code
         let rect = container.getBoundingClientRect();
         let mouseX = e.clientX - rect.left;
@@ -281,29 +315,39 @@
                 cellAdj.style.backgroundColor = color;
             }
         }
-        
-
-
     }
-/*
-    function eraseCell(e){
+
+    //accounts for a large brush size
+    function fillCellLarge(e){
+        //regular fill cell code
         let rect = container.getBoundingClientRect();
         let mouseX = e.clientX - rect.left;
         let mouseY = e.clientY - rect.top;
         let columnWidth = cellWidth+cellSpacing;
         let col = Math.floor(mouseX/columnWidth);
         let row = Math.floor(mouseY/columnWidth);
+
+        //sets all surrounding cells to the color
+        //middle cell
         let selectedCell = cells[row][col];
         selectedCell.className = "cellSelected";
-        selectedCell.style.backgroundColor = "#fff";    
+        selectedCell.style.backgroundColor = color;
+
+        let selectedCellArr = [cells[row+1][col], cells[row-1][col], cells[row][col+1], cells[row][col-1], cells[row+1][col+1], cells[row+1][col-1], cells[row-1][col+1], cells[row-1][col-1], cells[row-2][col], cells[row+2][col], cells[row-2][col-1], cells[row-2][col-2], cells[row-2][col+1], cells[row-2][col+2], cells[row+2][col-1], cells[row+2][col-2],cells[row+2][col+1], cells[row+2][col+2],cells[row][col+2], cells[row][col-2], cells[row+1][col+2],cells[row-1][col+2],cells[row+1][col-2],cells[row-1][col-2],];
+
+        for(cellAdj of selectedCellArr){
+            if(cellAdj != null){
+                cellAdj.className = "cellSelected";
+                cellAdj.style.backgroundColor = color;
+            }
+        }
     }
-    */
     
     let mouseIsDown = false;
     
     container.onmousemove = (e) =>{
         e.preventDefault();
-        if (mouseIsDown) fillCellLarge(e);
+        if (mouseIsDown) fillCell(e);
     }
     
     container.onmousedown = (e) =>{
@@ -413,7 +457,6 @@
         let save = localStorage.setItem(key,canvas);
         allSaveNames = JSON.stringify(allSaveNames);
         let permSave = localStorage.setItem("--SaveData--",allSaveNames);
-        allSaveNames = JSON.parse(allSaveNames);
         AddSaveState(key);
     }
     let applyPallette = (colorval) =>{
