@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lekton:700" rel="stylesheet">
+    <link href="p2CSS.css" rel="stylesheet">
+    <title>Documentation Project 2</title>
+</head>
+<body style="width:70%; margin:auto;">
+<div id="titleBar">
+    <h1>Documentation for Project 2: Extended Pixel Art Maker</h1>
+    <h2>Made by Declan Behan and Emily Turner</h2>
+</div>
+
+<div>
+    <h2>Our Process and Credit Where Credit is Due</h2>
+    <p>We started out with the basic pixel editor from our homework. The first big change made was adding RGB and hex color boxes in the tool box area. This allowed the user to manually select which color they wanted.</p>
+    <p>The second change was made to the overall aesthetic of the site. Minor tweaks to the css and html using flexbox left the site feeling better themed towards the topic.</p>
+    <p>The third major change was adding local saves to the site so that the user could save their work locally and return to it later. This was Declan's main job and it nearly killed him, not gonna lie. The way it works is that you enter in the name of your piece and hit 'Save Art'. It is then added to the load art menu. If you mess around with the canvas some more and decide to go back to the saved art, click the name on the drop down and click 'Load Art'</p>
+    <p>The fourth major change was hex to rgb and rgb to hex conversion. I actually ended up using <a href="www.stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb/">Stack Overflow</a> to help me with this problem.</p>
+    <p>Our final big change was the implementation of brush sizes and erasers. I created logos for each of the potential brushes and one for the eraser. Clicking on a different brush size changes the fillCell method so that it fills in the cells around it in addition to itself.</p>
+</div>
+
+<div>
+    <h2>The Requirements</h2>
+    <h3>Functionality</h3>
+    <p>Useful? I'd hope so! The local save allows you to access and modify your pixel art at any time.</p>
+    <p>Demonstrates Creativity? It is literally a catalyst to encourage creativity! In terms of original programming, we had to be original to allow the 'pixels' to save locally whilst still allowing the user to pick a name. We did this by linking the names with the given array of pixels so that every file is linked with its proper key.</p>
+    <p>Runs without Errors? Man I really hope so? There was a <b>LOT</b> of troubleshooting the saves since we were using two seperate computers. Also due to the flex box, the canvas looks different on my screen compared to Declan's which cause a ton of issues when it was in development. My laptop has the processing power of a paperclip and the resolution following in kind while Declan has a man-made monstrosity that is a crime against nature. Very difficult to make it work for both computers.</p>
+
+    <h3>Design and Interaction</h3>
+    <p>Visual Design is pleasing? I'm not going to lie, I'm really bad at design. But Declan is pretty good at design and he says the website looks good which is honestly good enough for me. It is not meant to be bright or overly complicated because that would distract from the actual purpose which is <b>ART.</b></p>
+    <p>Interface is clear and well labeled? Every section has a h2 tag title which describes the purpose of the section</p>
+    <p>Trying to get color handling working made me cry and was something I spent a ton of time doing. It <i>should</i> work perfectly and replace any poorly entered code with a default value.</p>
+
+    <h3>HTML/CSS/Media</h3>
+    <p>Both the HTML and CSS validate at the time that I am writing this.</p>
+    <p>The CSS that is not modified by JavaScript is in an external style sheet.</p>
+    <p>Makes proper use of structural tags, etc.</p>
+
+    <h3>Code</h3>
+    <p>All commented. It took me ages.</p>
+
+    <a href="PixelPainterExtended.html" style = "text-align:center;"><h3>Back to the Good Stuff</h3></a>
+</div>
+    
+</body>
+</html>
