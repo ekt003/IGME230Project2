@@ -368,10 +368,14 @@
 
         //reads in value from a hex picker box
         let box = document.querySelector("#hexPicker");
+        
 
         //validates bad entries
         if(box.length>6 || box.length<6){
             console.log("NOT A HEX REEEEEEEEEEEE!");
+        }
+        if(box.value.includes('#')){
+            box.value = box.value.replace('#','')
         }
         //sets proper value if valid
         else{
