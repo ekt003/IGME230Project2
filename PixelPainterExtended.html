@@ -327,23 +327,27 @@
         e.preventDefault();
         mouseIsDown = false;
     }
-    
-//    
-//    document.querySelector("#colorChooser").onchange = (e)=>{
-//        color = e.target.value;
-//    }
 
     //CODE FROM: stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
-    function hexToRgb(hex){
+    function hexToRgb(hex) {
         if(hex.includes('#')){
-            hex = hex.replace('#','')
+            hex = hex.replace('#','');
         }
-        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-        return result ? {
-            r: r.toString(10),
-            g: g.toString(10),
-            b: b.toString(10),
-        } : null;
+        if(hex.includes('NaN')){
+           hex = hex.replace('NaN','00');
+        }
+        if(hex.includes('NaNNaN')){
+           hex = hex.replace('NaNNaN','0000');
+        }
+        var hexint = parseInt(hex, 16);
+        var r = (hexint >> 16) & 255;
+        var g = (hexint >> 8) & 255;
+        var b = hexint & 255;
+        return {
+            r:r,
+            g:g,
+            b:b
+        };
     }
 
     //changes the paint color based on a given hex code
@@ -368,7 +372,6 @@
             console.log("I made a Hex!");
             //sets rgb to proper values
             let rgbConversion = hexToRgb("#" + box.value);
-            console.log(rgbConversion.r);
             document.querySelector("#rgbPickerRed").value = rgbConversion.r;
             document.querySelector("#rgbPickerGreen").value = rgbConversion.g;
             document.querySelector("#rgbPickerBlue").value = rgbConversion.b;
@@ -390,7 +393,7 @@
     //converts to hex value and displays it in the hex box
     //CODE FROM: stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
     function rgbToHex(r,g,b){
-        return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+        return componentToHex(r) + componentToHex(g) + componentToHex(b);
     }
 
     //RGB Selector for Pixel Editor. Takes values from three boxes and converts it into an RGB value
@@ -409,16 +412,19 @@
             if(element.length>3){
                 element.value = 0;
             }
+<<<<<<< HEAD
             if(isNaN(element)){
                 element.value = 0;
             }
+=======
+            
+>>>>>>> 4efe35c1ff622f8364cfcb9edb4bda614959035e
         }
 
         //console log for debugging purposes
         console.log("Color Generated");
 
         //generates new color
-        document.querySelector("#rgbSelector").style.color = "rgb(" + boxRed.value + "," + boxGreen.value + "," + boxBlue.value + ")";
         color = "rgb(" + boxRed.value + "," + boxGreen.value + "," + boxBlue.value + ")";
         
         //hex color box code set
