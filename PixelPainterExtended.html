@@ -355,6 +355,7 @@
         if(hex.includes('#')){
             hex = hex.replace('#','')
         }
+<<<<<<< HEAD
         var hexint = parseInt(hex, 16);
         var r = (hexint >> 16) & 255;
         var g = (hexint >> 8) & 255;
@@ -364,6 +365,14 @@
             g:g,
             b:b
         };
+=======
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: r.toString(10),
+            g: g.toString(10),
+            b: b.toString(10),
+        } : null;
+>>>>>>> cf48873c9f44c2d786b0a1e8c4f73482dc3eb03f
     }
 
     //changes the paint color based on a given hex code
