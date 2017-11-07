@@ -143,7 +143,7 @@
     <div id="flexRight">
         <h2>Toolbox</h2>
         <h3>Current Color</h3>
-        <button class="palletteButton" id="currentColor"></button>
+        <button class="palletteButton" id="currentColor" style="background-color: red"></button>
         <h3>Preset Color Picker</h3>
         
         <button class="palletteButton" style="background-color: black" onclick="applyPallette('black')"></button>
@@ -359,9 +359,9 @@
     function hexToRgb(hex){
         var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
         return result ? {
-            r: parseInt(result.r, 16),
-            g: parseInt(result.g, 16),
-            b: parseInt(result.b, 16)
+            r: r.toString(10),
+            g: g.toString(10),
+            b: b.toString(10),
         } : null;
     }
 
@@ -375,6 +375,8 @@
         //validates bad entries
         if(box.length>6 || box.length<6){
             console.log("NOT A HEX REEEEEEEEEEEE!");
+            document.querySelector("#currentColor").style.backgroundColor = color;
+
         }
         if(box.value.includes('#')){
             box.value = box.value.replace('#','')
@@ -423,6 +425,9 @@
             if(element.length>3){
                 element.value = 0;
             }
+            if(isNan(element)){
+                element.value = 0;
+            }
         }
 
         //console log for debugging purposes
@@ -469,7 +474,7 @@
             document.querySelector("#currentColor").style.backgroundColor = color;
     }
     
-    //THis Function Loads a saved piece of art from the local storage. It reads from the dropdown menu
+    //This Function Loads a saved piece of art from the local storage. It reads from the dropdown menu
     let loadArt = () =>{
         //gets the dropdown save menu
         let key = document.querySelector("#saveChooser").value;
