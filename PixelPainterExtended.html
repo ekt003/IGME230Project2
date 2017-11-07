@@ -142,6 +142,8 @@
     </div>
     <div id="flexRight">
         <h2>Toolbox</h2>
+        <h3>Current Color</h3>
+        <button class="palletteButton" id="currentColor"></button>
         <h3>Preset Color Picker</h3>
         
         <button class="palletteButton" style="background-color: black" onclick="applyPallette('black')"></button>
@@ -360,9 +362,9 @@
         }
         var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
         return result ? {
-            r: parseInt(result[1], 16),
-            g: parseInt(result[2], 16),
-            b: parseInt(result[3], 16)
+            r: parseInt(result.r, 16),
+            g: parseInt(result.g, 16),
+            b: parseInt(result.b, 16)
         } : null;
     }
 
@@ -382,14 +384,16 @@
         }
         //sets proper value if valid
         else{
+            
             console.log("I made a Hex!");
             //sets rgb to proper values
             let rgbConversion = hexToRgb("#" + box.value);
-            console.log(rgbConversion[1]);
-            document.querySelector("#rgbPickerRed").value = rgbConversion[1];
-            document.querySelector("#rgbPickerGreen").value = rgbConversion[2];
-            document.querySelector("#rgbPickerBlue").value = rgbConversion[3];
+            console.log(rgbConversion.r);
+            document.querySelector("#rgbPickerRed").value = rgbConversion.r;
+            document.querySelector("#rgbPickerGreen").value = rgbConversion.g;
+            document.querySelector("#rgbPickerBlue").value = rgbConversion.b;
             color = "#"+box.value;
+            document.querySelector("#currentColor").style.backgroundColor = color;
         }
     }
 
@@ -433,6 +437,7 @@
         
         //hex color box code set
         document.querySelector("#hexPicker").value = rgbToHex(parseInt(boxRed.value), parseInt(boxGreen.value), parseInt(boxBlue.value));
+        document.querySelector("#currentColor").style.backgroundColor = color;
     }
 
 
@@ -464,9 +469,10 @@
     }
     let applyPallette = (colorval) =>{
             color = colorval;
+            document.querySelector("#currentColor").style.backgroundColor = color;
     }
     
-    //THis Function Loads a saved peice of art from the local storage. It reads from the dropdown menu
+    //THis Function Loads a saved piece of art from the local storage. It reads from the dropdown menu
     let loadArt = () =>{
         //gets the dropdown save menu
         let key = document.querySelector("#saveChooser").value;
@@ -522,6 +528,8 @@
         //also give them to the console
         console.log(allSaveNames);
     }
+
+
     
 
     //Declan Behan and Emily Turner
