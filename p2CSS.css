@@ -29,3 +29,12 @@ p{
     font-size: 12pt;
     margin-bottom:10px;
 }
+a{
+    color:#550000;
+    text-decoration: none;
+
+}
+
+a:hover{
+    color:#FF0000;
+}
