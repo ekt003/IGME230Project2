@@ -295,7 +295,7 @@
         selectedCell.className = "cellSelected";
         selectedCell.style.backgroundColor = color;
 
-        let selectedCellArr = [cells[row+1][col], cells[row-1][col], cells[row][col+1], cells[row][col-1], cells[row+1][col+1], cells[row+1][col-1], cells[row-1][col+1], cells[row-1][col-1]];
+        let selectedCellArr = [cells[row+1][col], cells[row-1][col], cells[row][col+1], cells[row][col-1]];
 
         for(cellAdj of selectedCellArr){
             if(cellAdj != null){
@@ -321,7 +321,7 @@
         selectedCell.className = "cellSelected";
         selectedCell.style.backgroundColor = color;
 
-        let selectedCellArr = [cells[row+1][col], cells[row-1][col], cells[row][col+1], cells[row][col-1], cells[row+1][col+1], cells[row+1][col-1], cells[row-1][col+1], cells[row-1][col-1], cells[row-2][col], cells[row+2][col], cells[row-2][col-1], cells[row-2][col-2], cells[row-2][col+1], cells[row-2][col+2], cells[row+2][col-1], cells[row+2][col-2],cells[row+2][col+1], cells[row+2][col+2],cells[row][col+2], cells[row][col-2], cells[row+1][col+2],cells[row-1][col+2],cells[row+1][col-2],cells[row-1][col-2],];
+        let selectedCellArr = [cells[row+1][col], cells[row-1][col], cells[row][col+1], cells[row][col-1], cells[row+1][col+1], cells[row+1][col-1], cells[row-1][col+1], cells[row-1][col-1], cells[row-2][col], cells[row+2][col], cells[row-2][col-1], cells[row-2][col+1], cells[row+2][col-1], cells[row+2][col+1], cells[row][col+2], cells[row][col-2], cells[row+1][col+2],cells[row-1][col+2],cells[row+1][col-2],cells[row-1][col-2],];
 
         for(cellAdj of selectedCellArr){
             if(cellAdj != null){
@@ -352,9 +352,15 @@
 //    document.querySelector("#colorChooser").onchange = (e)=>{
 //        color = e.target.value;
 //    }
+
+    //CODE FROM: stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
     function hexToRgb(hex){
-        let result = /^#?([a-f/d]{2})([a-f/d]{2})$/i.exec(hex);
-        return result;
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : null;
     }
 
     //changes the paint color based on a given hex code
@@ -371,7 +377,8 @@
         else{
             console.log("I made a Hex!");
             //sets rgb to proper values
-            let rgbConversion = hexToRgb(box.value);
+            let rgbConversion = hexToRgb("#" + box.value);
+            console.log(rgbConversion[1]);
             document.querySelector("#rgbPickerRed").value = rgbConversion[1];
             document.querySelector("#rgbPickerGreen").value = rgbConversion[2];
             document.querySelector("#rgbPickerBlue").value = rgbConversion[3];
