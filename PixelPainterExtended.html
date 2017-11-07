@@ -49,7 +49,7 @@
         border: 1px solid black;
         order: 3;
         text-align: left;
-        padding-left: 100px: 
+        padding-left: 100px;
         
     }
     #flexMiddle{
@@ -144,27 +144,6 @@
         <h2>Toolbox</h2>
         <h3>Preset Color Picker</h3>
         
-<!--
-        <select id="colorChooser">
-            <option value="aqua">Aqua</option>
-            <option value="Bisque">Bisque</option>
-            <option value="black">Black</option>
-            <option value="blue">Blue</option>
-            <option value="brown">Brown</option>
-            <option value="chocolate">Chocolate</option>
-            <option value="cyan">Cyan</option>
-            <option value="DarkGray">Dark Gray</option>
-            <option value="green">Green</option>
-            <option value="red" selected>Red</option>
-            <option value="magenta">Magenta</option>
-            <option value="orange">Orange</option>
-            <option value="tan">Tan</option>
-            <option value="white">White</option>
-            <option value="wheat">Wheat</option>
-            <option value="WhiteSmoke">WhiteSmoke </option>
-            <option value="yellow">Yellow</option>
-        </select>
--->
         <button class="palletteButton" style="background-color: black" onclick="applyPallette('black')"></button>
         <button class="palletteButton" style="background-color: gray" onclick="applyPallette('grey')"></button>
         <button class="palletteButton" style="background-color: brown" onclick="applyPallette('brown')"></button>
@@ -187,8 +166,6 @@
         <button class="palletteButton" style="background-color: cadetblue" onclick="applyPallette('cadetblue')"></button>
         <button class="palletteButton" style="background-color: lavender" onclick="applyPallette('lavender')"></button>
 
-
-        <!-- Hey y'all this is where the new stuff really starts-->
         <!--Color Selection based on HEX Colors-->
         <h3>Hex Color Picker</h3>
         <input id="hexPicker" type="text" name="hexbox">
@@ -220,6 +197,7 @@
 
 
 <script>
+    //save names
     let allSaveNames = [];
 
     
