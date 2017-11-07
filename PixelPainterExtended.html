@@ -300,7 +300,7 @@
         selectedCell.style.backgroundColor = color;
 
         let selectedCellArr = [cells[row+1][col], cells[row-1][col], cells[row][col+1], cells[row][col-1], cells[row+1][col+1], cells[row+1][col-1], cells[row-1][col+1], cells[row-1][col-1], cells[row-2][col], cells[row+2][col], cells[row-2][col-1], cells[row-2][col+1], cells[row+2][col-1], cells[row+2][col+1], cells[row][col+2], cells[row][col-2], cells[row+1][col+2],cells[row-1][col+2],cells[row+1][col-2],cells[row-1][col-2],];
-
+        
         for(cellAdj of selectedCellArr){
             if(cellAdj != null){
                 cellAdj.className = "cellSelected";
@@ -410,7 +410,14 @@
             if(element.length>3){
                 element.value = 0;
             }
+<<<<<<< HEAD
             
+=======
+            if(isNaN(element)){
+                element.value = 0;
+            }
+
+>>>>>>> f63577b505e07e52934bee81231ce09147e95722
         }
 
         //console log for debugging purposes
