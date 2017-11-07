@@ -142,6 +142,8 @@
     </div>
     <div id="flexRight">
         <h2>Toolbox</h2>
+        <h3>Current Color</h3>
+        <button class="palletteButton" id="currentColor"></button>
         <h3>Preset Color Picker</h3>
         
         <button class="palletteButton" style="background-color: black" onclick="applyPallette('black')"></button>
@@ -375,6 +377,7 @@
         }
         //sets proper value if valid
         else{
+            
             console.log("I made a Hex!");
             //sets rgb to proper values
             let rgbConversion = hexToRgb("#" + box.value);
@@ -515,6 +518,8 @@
         //also give them to the console
         console.log(allSaveNames);
     }
+
+    document.querySelector("#currentColor").style.backgroundColor = color;
     
 
     //Declan Behan and Emily Turner
