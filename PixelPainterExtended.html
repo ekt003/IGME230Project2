@@ -207,10 +207,11 @@
         <h3>Brush Options</h3>
         <!--Applies different kinds of brushes depending on which icon is pressed-->
         <button class="palletteButton" style="background-image: url('smallBrush.png')" onclick="changeSmall()"></button>
-        <button class="palletteButton" style="background-image: url('medBrush.png')" onclick="changeMed"></button>
+        <button class="palletteButton" style="background-image: url('medBrush.png')" onclick="changeMed()"></button>
         <button class="palletteButton" style="background-image: url('largeBrush.png')" onclick="changeLarge()"></button>
         
         <!--This just sets the brush color to white -->
+
         <button class="palletteButton" style="background-image: url('eraser.png')" onclick="applyPallette('white')"></button>
 
     </div>
@@ -258,38 +259,47 @@
     //changes the brush size variable
     function changeSmall(){
         brushSize = 0;
+        console.log("I am dead inside and very very smol");
     }
 
     function changeMed(){
         brushSize = 1;
+        console.log("I am still dead inside but now i am a hefty one too");
     }
 
     function changeLarge(){
         brushSize = 2;
+        console.log("I am dead inside as well but now I am a LargeTM boy.");
     }
 
     function fillCell(e){
-        if(brushSize=1){
+        if(brushSize==1){
             fillCellMed(e);
         }
-        else if(brushSize = 2){
+        else if(brushSize == 2){
             fillCellLarge(e);
         }
         else{ //small brush size is default
-            let rect = container.getBoundingClientRect();
-            let mouseX = e.clientX - rect.left;
-            let mouseY = e.clientY - rect.top;
-            let columnWidth = cellWidth+cellSpacing;
-            let col = Math.floor(mouseX/columnWidth);
-            let row = Math.floor(mouseY/columnWidth);
-            let selectedCell = cells[row][col];
-            selectedCell.className = "cellSelected";
-            selectedCell.style.backgroundColor = color;
+            fillCellSmall(e);
         }
 
 //        console.log(`${col},${row}`);
 
     }
+
+    //accounts for a small brush size
+    function fillCellSmall(e){
+        let rect = container.getBoundingClientRect();
+        let mouseX = e.clientX - rect.left;
+        let mouseY = e.clientY - rect.top;
+        let columnWidth = cellWidth+cellSpacing;
+        let col = Math.floor(mouseX/columnWidth);
+        let row = Math.floor(mouseY/columnWidth);
+        let selectedCell = cells[row][col];
+        selectedCell.className = "cellSelected";
+        selectedCell.style.backgroundColor = color;
+    }
+
 
     //accounts for a medium brush size
     function fillCellMed(e){
