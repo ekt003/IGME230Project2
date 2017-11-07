@@ -1,0 +1,31 @@
+*{
+    background-color: lightgray;
+}
+
+#titleBar{
+    border: 1px solid black;
+    text-align: center;
+    width: auto;
+}
+h1{
+    font-family: 'Press Start 2P', cursive;
+    font-size:2em;
+}
+h2{
+    width: auto;
+    margin-top: 10px;
+    font-family: 'Lekton', sans-serif;		
+    font-size:18pt;
+    margin-bottom:0px;
+}
+h3{
+    margin: 0;
+    font-family: 'Lekton', sans-serif;        
+    font-size: 16pt;
+}
+p{
+    margin: 0;
+    font-family: 'Lekton', sans-serif;        
+    font-size: 12pt;
+    margin-bottom:10px;
+}

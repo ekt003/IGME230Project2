@@ -5,6 +5,7 @@
 	<title>Pixel Painter Extended</title>
 	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lekton:700" rel="stylesheet">
+    <link href="p2CSS.css" rel="stylesheet">
 	<style>
     
     html{
@@ -86,32 +87,7 @@
 /*		top: 90px;*/
 /*		left:800px;*/
 	}
-    #titleBar{
-        border: 1px solid black;
-        text-align: center;
-        width: auto;
-    }
-	h1{
-		font-family: 'Press Start 2P', cursive;
-		font-size:2em;
-	}
-    h2{
-        width: auto;
-        margin-top: 10px;
-        font-family: 'Lekton', sans-serif;		
-        font-size:18pt;
-        margin-bottom:0px;
-    }
-    h3{
-        margin: 0;
-        font-family: 'Lekton', sans-serif;        
-        font-size: 16pt;
-    }
-    p{
-        margin: 0;
-        font-family: 'Lekton', sans-serif;        
-        font-size: 12pt;
-    }
+    
 	
 	</style>
 </head>
@@ -123,6 +99,8 @@
 <div class="flexBox">
     <div id="flexLeft">
         <p>This is a pixel painter web application. Made by Declan Behan and Emily Turner for Professor Tony Jefferson's IGME 230 Web Design and Implementation, Section 5. Free to use share or modify with proper citation of the source material.</p>   
+        <a href="documentation.html"><h3>Documentation</h3></a>
+        
         <h2>Tutorial</h2>
         <p>Click and drag your mouse around the screen to fill it with color. Enter in a hex code, RGB value, or select a preset to change your color.</p>
         <p>Change brush sizes by clicking the icons in the lower right portion of the screen. Click the eraser icon if you make any mistakes!</p>
@@ -405,7 +383,10 @@
     //converts to hex value and displays it in the hex box
     //CODE FROM: stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
     function componentToHex(c){
+        //converts from base 10 to base 16
         let hex = c.toString(16);
+
+        //returns 
         return hex.length == 1 ? "0" + hex : hex;
     }
 
@@ -431,7 +412,13 @@
             if(element.length>3){
                 element.value = 0;
             }
+<<<<<<< HEAD
+            if(isNaN(element)){
+                element.value = 0;
+            }
+=======
             
+>>>>>>> 4efe35c1ff622f8364cfcb9edb4bda614959035e
         }
 
         //console log for debugging purposes
